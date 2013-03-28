@@ -13,7 +13,7 @@
     <%= erb :_post_header %>
     <% @posts.each do |post| %>
       <li>
-        <div class="post-text"><%= post.text %></div>
+        <div class="post-text"><%= auto_link post.text %></div>
         <div class="post-info">
           <% if post.published? %>
             <i class="icon icon-time"></i>

@@ -37,6 +37,15 @@ module BrandyWine
       def not_authenticated
         throw(:halt, [401, "Not authorized\n"])
       end
+
+      def auto_link(string)
+        return unless string
+        urls = string.scan(/(?:https?:\/\/|www)[^\s]+/)
+        urls.each do |url|
+          string.sub! url, "<a href=\"#{url}\">#{url}</a>"
+        end
+        string
+      end
     end
 
     get '/' do
