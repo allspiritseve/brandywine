@@ -1,0 +1,64 @@
+body {
+}
+
+/* Clearfix Hack */
+.group:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.group { display: inline-table; }
+* html .group { height: 1%; }
+* .group { display: block; }
+
+.river {
+  margin-left: auto;
+  margin-right: auto;
+  width: 440px;
+}
+
+.river-header .content {
+  margin-left: 95px;
+}
+
+.river-header h1 {
+  color: #445;
+  font-size: 25px;
+  line-height: 30px;
+  margin: 0;
+}
+
+.river-header h2,
+.river-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+}
+
+.river-header .icon {
+  float: left;
+}
+
+.river ul {
+  background-color: #fff;
+  border-bottom: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.river li {
+  margin-bottom: 20px;
+}
+
+.river .post-text {
+  color: #333;
+  font-size: 18px;
+  line-height: 1.5em;
+}
+
+.river .post-info {
+  color: #666;
+  margin-top: 5px;
+}
+
+.river .post-info .icon {
+  margin-right: 5px;
+}

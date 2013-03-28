@@ -1,5 +1,15 @@
 require 'rubygems'
-require 'sinatra'
+require 'bundler/setup'
+
+Bundler.require(:default, :development)
+
+Dir[File.dirname(__FILE__) + '/config/initializers/*.rb'].each do |file|
+  require file
+end
+
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each do |file|
+  require file
+end
 
 require './app'
 
