@@ -63,6 +63,11 @@ module BrandyWine
       erb :posts
     end
 
+    get '/posts/:id' do
+      @post = Post.find(params[:id])
+      erb :post
+    end
+
     get '/tweets' do
       @tweets = Twitter.home_timeline
       erb :tweets

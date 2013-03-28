@@ -10,29 +10,22 @@
         </form>
       </li>
     <% end %>
-  <li class="river-header group">
-    <div class="icon"><img src="icon.png" width="80px" height="80px" /></div>
-    <div class="content">
-      <h1>Cory Kaufman-Schofield</h1>
-      <h2>Writer / Web Developer &mdash; Ann Arbor, MI</h2>
-      <h3><a href="http://corykaufman.com">http://corykaufman.com</a></h3>
-    </div>
-  </li>
-  <% @posts.each do |post| %>
-    <li>
-      <div class="post-text"><%= post.text %></div>
-      <div class="post-info">
-        <% if post.published? %>
-          <i class="icon icon-time"></i>
-          <a href="/posts/<%= post.id %>">
-            <%= post.published_at.strftime('%A, %B %-d &mdash; %-I:%M%P') %>
-          </a>
-        <% else %>
-          Draft
-          <!-- &mdash; <a href="/posts/<%= post.id %>/publish" data-method="post">Post</a> %> -->
-        <% end %>
-      </div>
-    </li>
-  <% end %>
+    <%= erb :_post_header %>
+    <% @posts.each do |post| %>
+      <li>
+        <div class="post-text"><%= post.text %></div>
+        <div class="post-info">
+          <% if post.published? %>
+            <i class="icon icon-time"></i>
+            <a href="/posts/<%= post.id %>">
+              <%= post.published_at.strftime('%A, %B %-d &mdash; %-I:%M%P') %>
+            </a>
+          <% else %>
+            Draft
+            <!-- &mdash; <a href="/posts/<%= post.id %>/publish" data-method="post">Post</a> %> -->
+          <% end %>
+        </div>
+      </li>
+    <% end %>
   </ul>
 </div>

@@ -7,7 +7,7 @@ body {
 * html .group { height: 1%; }
 * .group { display: block; }
 
-.river {
+.river, .post {
   margin-left: auto;
   margin-right: auto;
   width: 440px;

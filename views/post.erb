@@ -1,0 +1,17 @@
+<div class="river">
+  <p><a href="/posts">&laquo; Back to the river</a></p>
+  <ul>
+    <li>
+      <div class="post-text"><%= @post.text %></div>
+      <div class="post-info">
+        <% if @post.published? %>
+          <i class="icon icon-time"></i>
+          <%= @post.published_at.strftime('%A, %B %-d &mdash; %-I:%M%P') %>
+        <% else %>
+          Draft
+          <!-- &mdash; <a href="/posts/<%= @post.id %>/publish" data-method="post">Post</a> %> -->
+        <% end %>
+      </div>
+    </li>
+  </ul>
+</div>

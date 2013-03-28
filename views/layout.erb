@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
     <title>BrandyWine</title>
-    <link href="bootstrap.min.css" type="text/css" rel="stylesheet" />
-    <link href="application.css" type="text/css" rel="stylesheet" />
-    <script src="bootstrap.min.js"></script>
-    <script src="rails.js"></script>
+    <link href="/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="/application.css" type="text/css" rel="stylesheet" />
+    <script src="/bootstrap.min.js"></script>
+    <script src="/rails.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
@@ -15,7 +15,7 @@
           <a class="brand" href="/">BrandyWine</a>
           <ul class="nav">
             <li class="<%= "active" if request.path_info == '/' %>"><a href="/">Home</a></li>
-            <li class="<%= "active" if request.path_info == '/posts' %>"><a href="/posts">Twitter River</a></li>
+            <li class="<%= "active" if request.path_info.match '^\/posts' %>"><a href="/posts">Twitter River</a></li>
           </ul>
         </div>
       </div>
