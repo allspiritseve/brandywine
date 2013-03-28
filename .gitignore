@@ -1,2 +1,4 @@
 .env
 config/database.yml
+.bundle
+tmp
