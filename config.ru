@@ -1,3 +1,3 @@
 require './app'
 
-run BrandyWine::Application.new
+run Brandywine::Application.new

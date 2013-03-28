@@ -1,45 +1,23 @@
-require 'rubygems'
-require 'bundler/setup'
-
-Bundler.require(:default, :development)
-
-Dir[File.dirname(__FILE__) + '/config/initializers/*.rb'].each do |file|
-  require file
+File.expand_path('../', __FILE__).tap do |path|
+  $LOAD_PATH.unshift(path) unless $LOAD_PATH.include?(path)
 end
 
-Dir[File.dirname(__FILE__) + '/lib/*.rb'].each do |file|
-  require file
-end
+require 'config/init'
+require 'sinatra/activerecord'
 
-use Rack::ShowExceptions
+require 'lib/auth_helper'
+require 'lib/post'
+require 'lib/user'
 
-require 'rss'
-
-module BrandyWine
+module Brandywine
   class Application < Sinatra::Base
     enable :sessions
+    helpers Brandywine::AuthHelper
+    helpers Sinatra::JSON
+    register Sinatra::ActiveRecordExtension
+    use Rack::ShowExceptions
 
     helpers do
-      def current_user
-        @__current_user ||= set_current_user
-      end
-
-      def set_current_user
-        return unless session[:user_id]
-        User.find(session[:user_id]).tap do |user|
-          session.delete(:user_id) unless user
-        end
-      end
-
-      def require_authentication!
-        return if current_user
-        not_authenticated
-      end
-
-      def not_authenticated
-        throw(:halt, [401, "Not authorized\n"])
-      end
-
       def auto_link(string)
         return unless string
         urls = string.scan(/(?:https?:\/\/|www)[^\s]+/)
@@ -105,6 +83,29 @@ module BrandyWine
           end
         end
       end
+    end
+
+    get '/posts.json' do
+      @posts = Post.river.published
+      items = @posts.map do |post|
+        {
+          :description => post.text,
+          :link => "http://rivers.corykaufman.com/posts/#{post.id}",
+          :guid => "http://rivers.corykaufman.com/posts/#{post.id}",
+          :pubDate => post.published_at.to_s
+        }
+      end
+      json :rss => {
+        :version => '2.0',
+        :channel => {
+          :author => "Cory Kaufman-Schofield",
+          :link => "http://rivers.corykaufman.com/posts",
+          :description => "Cory's feed",
+          :updated => Time.now.to_s,
+          :title => "Cory Kaufman-Schofield on Brandywine",
+          :item => items
+        }
+      }
     end
 
     get '/posts/:id' do
