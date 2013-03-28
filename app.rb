@@ -1,6 +1,3 @@
-require 'sinatra/base'
-
-
 module BrandyWine
   class Application < Sinatra::Base
     enable :sessions
@@ -46,7 +43,8 @@ module BrandyWine
     end
 
     get '/posts' do
-      @posts = Post.order('posted_at DESC, created_at DESC')
+      @posts = Post.river
+      @posts.public unless current_user
       erb :posts
     end
 
@@ -57,7 +55,10 @@ module BrandyWine
 
     post '/posts' do
       @post = Post.new(params[:post])
-      @post.save
+      @post.mark_as_published
+      if @post.save
+        Twitter.update(@post.text)
+      end
       redirect to('/posts')
     end
   end

@@ -21,7 +21,17 @@
   <% @posts.each do |post| %>
     <li>
       <div class="post-text"><%= post.text %></div>
-      <div class="post-info"><i class="icon icon-time"></i><a href="3"><%= post.posted_at.strftime('%A, %B %-d &mdash; %-I:%M%P') %></a></a></div>
+      <div class="post-info">
+        <% if post.published? %>
+          <i class="icon icon-time"></i>
+          <a href="/posts/<%= post.id %>">
+            <%= post.published_at.strftime('%A, %B %-d &mdash; %-I:%M%P') %>
+          </a>
+        <% else %>
+          Draft
+          <!-- &mdash; <a href="/posts/<%= post.id %>/publish" data-method="post">Post</a> %> -->
+        <% end %>
+      </div>
     </li>
   <% end %>
   </ul>

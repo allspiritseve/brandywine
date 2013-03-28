@@ -1,13 +1,18 @@
 class Post < ActiveRecord::Base
 
-  before_save :set_posted_at
+  scope :river, order('posts.published_at DESC, posts.created_at DESC')
+  scope :public, where('posts.published_at IS NOT NULL')
 
-  def posted_at
-    super || created_at
+  def published?
+    published_at?
   end
 
-  def set_posted_at
-    posted_at ||= created_at
+  def draft?
+    !published?
+  end
+
+  def mark_as_published
+    self.published_at ||= Time.now
   end
 
 end
