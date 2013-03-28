@@ -13,7 +13,8 @@
         <div class="navbar-inner">
           <a class="brand" href="/">BrandyWine</a>
           <ul class="nav">
-            <li class="active"><a href="/">Twitter River</a></li>
+            <li class="<%= "active" if request.path_info == '/' %>"><a href="/">Home</a></li>
+            <li class="<%= "active" if request.path_info == '/posts' %>"><a href="/posts">Twitter River</a></li>
           </ul>
         </div>
       </div>

@@ -1,5 +1,15 @@
 <div class="river">
   <ul>
+    <% if current_user %>
+      <li class="new-post group">
+        <form action="/posts" method="post">
+          <div class="input textarea text">
+            <textarea name="post[text]" class="post-text-input" rows="3"></textarea>
+          </div>
+          <button class="btn btn-primary pull-right" type="submit">Post</button>
+        </form>
+      </li>
+    <% end %>
   <li class="river-header group">
     <div class="icon"><img src="icon.png" width="80px" height="80px" /></div>
     <div class="content">
@@ -11,7 +21,7 @@
   <% @posts.each do |post| %>
     <li>
       <div class="post-text"><%= post.text %></div>
-      <div class="post-info"><i class="icon icon-time"></i><a href="3"><%= post.posted_at.strftime('%A, %B %-d &mdash; %-I:%M%P') if post.posted_at? %></a></a></div>
+      <div class="post-info"><i class="icon icon-time"></i><a href="3"><%= post.posted_at.strftime('%A, %B %-d &mdash; %-I:%M%P') %></a></a></div>
     </li>
   <% end %>
   </ul>

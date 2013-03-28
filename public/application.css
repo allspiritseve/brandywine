@@ -62,3 +62,16 @@ body {
 .river .post-info .icon {
   margin-right: 5px;
 }
+
+.login {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+}
+
+textarea.post-text-input {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
