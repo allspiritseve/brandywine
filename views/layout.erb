@@ -16,6 +16,7 @@
           <ul class="nav">
             <li class="<%= "active" if request.path_info == '/' %>"><a href="/">Home</a></li>
             <li class="<%= "active" if request.path_info.match '^\/posts' %>"><a href="/posts">Twitter River</a></li>
+            <li class="<%= "active" if request.path_info == '/feeds' %>"><a href="/feeds">Feeds</a></li>
           </ul>
         </div>
       </div>

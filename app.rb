@@ -13,6 +13,8 @@ end
 
 use Rack::ShowExceptions
 
+require 'rss'
+
 module BrandyWine
   class Application < Sinatra::Base
     enable :sessions
@@ -75,6 +77,34 @@ module BrandyWine
       @posts = Post.river
       @posts.published unless current_user
       erb :posts
+    end
+
+    get '/feeds' do
+      erb :feeds
+    end
+
+    get '/posts.xml' do
+      @posts = Post.river.published
+      builder do |xml|
+        xml.instruct! :xml, :version => '1.0'
+        xml.rss :version => '2.0', 'xmlns:microblog' => 'http://microblog.reallysimple.org/' do
+          xml.channel do
+            xml.author "Cory Kaufman-Schofield"
+            xml.link "http://rivers.corykaufman.com/posts"
+            xml.description "Cory's feed"
+            xml.updated Time.now.to_s
+            xml.title "Cory Kaufman-Schofield on Brandywine"
+          end
+          @posts.each do |post|
+            xml.item do
+              xml.description post.text
+              xml.link "http://rivers.corykaufman.com/posts/#{post.id}"
+              xml.guid "http://rivers.corykaufman.com/posts/#{post.id}"
+              xml.pubDate post.published_at.to_s
+            end
+          end
+        end
+      end
     end
 
     get '/posts/:id' do
