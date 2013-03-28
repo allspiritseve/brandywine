@@ -47,6 +47,11 @@ module BrandyWine
       erb :login
     end
 
+    get '/logout' do
+      session.delete(:user_id)
+      redirect to('/login')
+    end
+
     post '/login' do
       @user = User.find_by_email(params[:email])
       if @user && @user.authenticate(params[:password])
@@ -74,6 +79,7 @@ module BrandyWine
     end
 
     post '/posts' do
+      require_authentication!
       @post = Post.new(params[:post])
       @post.mark_as_published
       if @post.save
