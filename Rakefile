@@ -1,8 +1,3 @@
-require 'rubygems'
-require 'bundler/setup'
-
-Bundler.require(:default, :development)
-
+require './app'
 require 'sinatra/activerecord/rake'
 
-require './app'

@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
 
   scope :river, order('posts.published_at DESC, posts.created_at DESC')
-  scope :public, where('posts.published_at IS NOT NULL')
+  scope :published, where('posts.published_at IS NOT NULL')
 
   def published?
     published_at?

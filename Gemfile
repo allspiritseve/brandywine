@@ -8,7 +8,6 @@ gem 'dotenv'
 gem 'pg'
 gem 'rake'
 gem 'sinatra-activerecord'
-gem 'tux'
 gem 'twitter'
 gem 'unicorn'
 

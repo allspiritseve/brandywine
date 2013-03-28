@@ -1,3 +1,18 @@
+require 'rubygems'
+require 'bundler/setup'
+
+Bundler.require(:default, :development)
+
+Dir[File.dirname(__FILE__) + '/config/initializers/*.rb'].each do |file|
+  require file
+end
+
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each do |file|
+  require file
+end
+
+use Rack::ShowExceptions
+
 module BrandyWine
   class Application < Sinatra::Base
     enable :sessions
@@ -44,7 +59,7 @@ module BrandyWine
 
     get '/posts' do
       @posts = Post.river
-      @posts.public unless current_user
+      @posts.published unless current_user
       erb :posts
     end
 
